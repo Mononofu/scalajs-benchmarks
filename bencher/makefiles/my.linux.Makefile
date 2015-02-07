@@ -7,7 +7,7 @@
 # ASSUME there are symlinks to helper files in tmpdir
 # ASSUME no responsibility for removing temporary files from tmpdir
 
-# TYPICAL actions include an initial mv to give the expected extension 
+# TYPICAL actions include an initial mv to give the expected extension
 
 # ASSUME environment variables for compilers and interpreters are set in the header
 
@@ -25,7 +25,7 @@ COPTS := -O3 -fomit-frame-pointer
 # java
 ########################################
 
-%.java_run: %.java 
+%.java_run: %.java
 	-mv $< $(TEST).java
 	-$(JDKC) $(TEST).java
 
@@ -34,15 +34,34 @@ COPTS := -O3 -fomit-frame-pointer
 	-mv $< $(TEST).java
 	-$(JDKC) $(TEST).java
 
+########################################
+# scala
+########################################
+
+%.scala_run: %.scala
+	-mv $< $(TEST).scala
+	-$(SCALAC) $(TEST).scala
+
+########################################
+# scala.js
+########################################
+
+%.scalajs_run: %.scalajs
+	-$(SCALAJS_PREAMBLE) $(TEST) > $(TEST).scala
+	-cat $< >> $(TEST).scala
+	-$(SCALAJSC) $(TEST).scala
+	-$(SCALAJSLD) -u -o $(TEST).js .
+	-echo "$(TEST)_js().main()" >> $(TEST).js
+
 
 ########################################
 # gcc
 ########################################
 
-%.c: %.gcc 
+%.c: %.gcc
 	-@mv $< $@
 
-%.gcc_run: %.c 
+%.gcc_run: %.c
 	-$(GCC) -pipe -Wall $(COPTS) $(GCCOPTS) $< -o $@
 
 
@@ -50,11 +69,11 @@ COPTS := -O3 -fomit-frame-pointer
 # gpp
 ########################################
 
-%.c++: %.gpp 
+%.c++: %.gpp
 	-@mv $< $@
 
 %.gpp_run: %.c++
 	-$(GXX) -c -pipe $(COPTS) $(GXXOPTS) $< -o $<.o &&  \
-        $(GXX) $<.o -o $@ $(GXXLDOPTS) 
+        $(GXX) $<.o -o $@ $(GXXLDOPTS)
 
 
