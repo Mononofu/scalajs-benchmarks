@@ -62,7 +62,7 @@ COPTS := -O3 -fomit-frame-pointer
 	-@mv $< $@
 
 %.gcc_run: %.c
-	-$(GCC) -pipe -Wall $(COPTS) $(GCCOPTS) $< -o $@
+	-$(GCC) -pipe -Wall $(COPTS) $(GCCOPTS) $< -o $@ $(GCC_LINKOPTS)
 
 
 ########################################
