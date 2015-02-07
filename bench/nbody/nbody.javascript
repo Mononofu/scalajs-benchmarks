@@ -152,11 +152,11 @@ NBodySystem.prototype.energy = function(){
 }
 
 
-var n = arguments[0];
-var bodies = new NBodySystem( Array( 
-   Sun(),Jupiter(),Saturn(),Uranus(),Neptune() 
+var n = process.argv[2];
+var bodies = new NBodySystem( Array(
+   Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
 ));
 
-print(bodies.energy().toFixed(9));
+console.log(bodies.energy().toFixed(9));
 for (var i=0; i<n; i++){ bodies.advance(0.01); }
-print(bodies.energy().toFixed(9));
+console.log(bodies.energy().toFixed(9));

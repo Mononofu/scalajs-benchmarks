@@ -18,8 +18,8 @@ while(j = readline()) i+=j+"\n"; ilen = i.length
 
 i = i.replace(/^>.*\n|\n/mg, ''); clen = i.length
 
-for(j = 0; j<q.length; ++j) print(q[j].source, (i.match(q[j]) || []).length)
+for(j = 0; j<q.length; ++j) console.log(q[j].source, (i.match(q[j]) || []).length)
 
 for(j = -1; j<b.length - 1;) i = i.replace(b[++j], b[++j])
 
-print(["", ilen, clen, i.length].join("\n"))
+console.log(["", ilen, clen, i.length].join("\n"))

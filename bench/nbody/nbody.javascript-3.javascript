@@ -1,6 +1,6 @@
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-   contributed by Isaac Gouy 
+   contributed by Isaac Gouy
    Optimized by Roy Williams, Stefan Krause */
 
 var SIZE = 5;
@@ -33,11 +33,11 @@ var DAYS_PER_YEAR = 365.24;
  */
 function Body(x,y,z,vx,vy,vz,mass,buffer,bodyIndex) {
    this.offset = bodyIndex * 7;
-      
+
    bodyBuffer[this.offset +0] = x;
    bodyBuffer[this.offset +1] = y;
    bodyBuffer[this.offset +2] = z;
-   bodyBuffer[this.offset +3] = vx; 
+   bodyBuffer[this.offset +3] = vx;
    bodyBuffer[this.offset +4] = vy;
    bodyBuffer[this.offset +5] = vz;
    bodyBuffer[this.offset +6] = mass;
@@ -207,7 +207,7 @@ NBodySystem.prototype.energy = function(){
          dz = bodyBuffer[ofs_i +2] - bodyBuffer[ofs_j +2];
 
          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
-         e -= (bodyBuffer[ofs_i +6] * 
+         e -= (bodyBuffer[ofs_i +6] *
                bodyBuffer[ofs_j +6]) / distance;
       }
    }
@@ -217,20 +217,20 @@ NBodySystem.prototype.energy = function(){
 /**
  * @type {number}
  */
-n = arguments[0];
+n = process.argv[2];
 
 /**
  * @param {number} n
  */
 runTest = function(n) {
   var bodyBuffer = new ArrayBuffer(Body.BYTES_SIZE * 5);
-  var bodies = new NBodySystem( Array( 
+  var bodies = new NBodySystem( Array(
      Sun(bodyBuffer, 0),Jupiter(bodyBuffer, 1),
-     Saturn(bodyBuffer, 2),Uranus(bodyBuffer, 3),Neptune(bodyBuffer, 4) 
+     Saturn(bodyBuffer, 2),Uranus(bodyBuffer, 3),Neptune(bodyBuffer, 4)
   ));
-  print(bodies.energy().toFixed(9));
+  console.log(bodies.energy().toFixed(9));
   for (var i=0; i<n; i++){ bodies.advance(0.01); }
-  print(bodies.energy().toFixed(9));
+  console.log(bodies.energy().toFixed(9));
 }
 
 runTest(n);
