@@ -154,7 +154,7 @@ final class Board {
          c => if (c.piece == null) '-'.toByte
               else (c.piece.number + 48).toByte ))
 
-   def firstEmptyCellIndex() = cells.findIndexOf(c => c.isEmpty)
+   def firstEmptyCellIndex() = cells.indexWhere(c => c.isEmpty)
 
 
    private val cache = Array.fill(
